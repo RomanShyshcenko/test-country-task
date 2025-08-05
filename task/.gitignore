@@ -1,0 +1,55 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Compiled output
+**/dist/
+**/build/
+
+# Generated JavaScript files
+**/*.js
+**/*.js.map
+!**/jest.config.js
+!**/.eslintrc.js
+
+# Logs
+logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDEs and editors
+.idea/
+.vscode/
+*.swp
+*.swo
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
+
+# Environment files
+.env
+**/.env
+.env.*
+!.env.example
+!**/.env.example
+
+# Docker volumes
+postgres-data/
+**/postgres-data/
+
+# Testing
+coverage/
+.nyc_output/
+**/coverage/
+**/.nyc_output/
