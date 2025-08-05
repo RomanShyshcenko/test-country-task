@@ -1,0 +1,32 @@
+services:
+  server:
+    container_name: server
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    restart: unless-stopped
+    command: sh -c "yarn install && yarn start:dev"
+    depends_on:
+      - postgres
+
+  postgres:
+    container_name: postgres
+    image: postgres:16
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_DATABASE}
+    ports:
+      - "5433:5432" 
+    volumes:
+      - nest_pgdata:/var/lib/postgresql/data
+    restart: unless-stopped
+
+volumes:
+  nest_pgdata:
+    driver: local
