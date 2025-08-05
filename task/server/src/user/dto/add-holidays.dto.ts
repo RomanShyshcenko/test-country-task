@@ -1,25 +1,32 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsNumber, IsArray, ArrayMinSize, IsOptional } from 'class-validator';
+
+import {
+  IsString,
+  IsNumber,
+  IsArray,
+  ArrayMinSize,
+  IsOptional,
+} from 'class-validator';
 
 export class AddHolidaysDto {
   @ApiProperty({
     example: 'US',
-    description: 'Country code to fetch holidays from'
+    description: 'Country code to fetch holidays from',
   })
   @IsString()
   countryCode: string;
 
   @ApiProperty({
     example: 2025,
-    description: 'Year for which to fetch holidays'
+    description: 'Year for which to fetch holidays',
   })
   @IsNumber()
   year: number;
 
   @ApiProperty({
-    example: ["New Year's Day", "Independence Day"],
+    example: ["New Year's Day", 'Independence Day'],
     description: 'List of specific holidays to add (optional)',
-    required: false
+    required: false,
   })
   @IsOptional()
   @IsArray()

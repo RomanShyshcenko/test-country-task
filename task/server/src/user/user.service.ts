@@ -1,12 +1,18 @@
-import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 import { HttpService } from '@nestjs/axios';
+import {
+  Injectable,
+  NotFoundException,
+  ConflictException,
+} from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+
 import { firstValueFrom } from 'rxjs';
-import { User } from './entities/user.entity';
-import { CalendarEvent } from './entities/calendar-event.entity';
+import { Repository } from 'typeorm';
+
 import { AddHolidaysDto, PublicHolidayDto } from './dto/add-holidays.dto';
 import { CreateUserDto } from './dto/create-user.dto';
+import { CalendarEvent } from './entities/calendar-event.entity';
+import { User } from './entities/user.entity';
 
 @Injectable()
 export class UserService {
@@ -60,13 +66,13 @@ export class UserService {
 
     // Filter holidays if specific ones are requested
     if (addHolidaysDto.holidays && addHolidaysDto.holidays.length > 0) {
-      holidays = holidays.filter(holiday =>
-        addHolidaysDto.holidays!.some(name => name === holiday.name)
+      holidays = holidays.filter((holiday) =>
+        addHolidaysDto.holidays!.some((name) => name === holiday.name),
       );
     }
 
     // Create calendar events for each holiday
-    const calendarEvents = holidays.map(holiday => {
+    const calendarEvents = holidays.map((holiday) => {
       const event = this.calendarEventRepository.create({
         name: holiday.name,
         date: new Date(holiday.date),

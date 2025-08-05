@@ -1,5 +1,7 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
+
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
+
 import type { CalendarEvent } from '.';
 
 @Entity('users')
@@ -12,16 +14,19 @@ export class User {
   @Column()
   name: string;
 
-  @ApiProperty({ example: 'john@example.com', description: 'Email address of the user' })
+  @ApiProperty({
+    example: 'john@example.com',
+    description: 'Email address of the user',
+  })
   @Column({ unique: true })
   email: string;
 
-  @ApiProperty({ 
+  @ApiProperty({
     type: 'array',
     description: 'User calendar events',
     items: {
-      $ref: '#/components/schemas/CalendarEvent'
-    }
+      $ref: '#/components/schemas/CalendarEvent',
+    },
   })
   @OneToMany('CalendarEvent', 'user')
   calendarEvents: CalendarEvent[];

@@ -4,7 +4,10 @@ export class BorderCountryDto {
   @ApiProperty({ example: 'US', description: 'Country code' })
   countryCode: string;
 
-  @ApiProperty({ example: 'United States', description: 'Common name of the country' })
+  @ApiProperty({
+    example: 'United States',
+    description: 'Common name of the country',
+  })
   commonName: string;
 }
 
@@ -12,7 +15,10 @@ export class CountryPopulationYearDto {
   @ApiProperty({ example: 2021, description: 'Year of population count' })
   year: number;
 
-  @ApiProperty({ example: 331002651, description: 'Population count for that year' })
+  @ApiProperty({
+    example: 331002651,
+    description: 'Population count for that year',
+  })
   value: number;
 }
 

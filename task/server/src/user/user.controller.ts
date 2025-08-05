@@ -9,11 +9,12 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { ApiTags, ApiOperation, ApiResponse, ApiParam } from '@nestjs/swagger';
-import { UserService } from './user.service';
-import { CreateUserDto } from './dto/create-user.dto';
+
 import { AddHolidaysDto } from './dto/add-holidays.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 import { CalendarEvent } from './entities/calendar-event.entity';
 import { User } from './entities/user.entity';
+import { UserService } from './user.service';
 
 @ApiTags('users')
 @Controller('users')
@@ -26,9 +27,9 @@ export class UserController {
     description: 'User has been successfully created',
     type: User,
   })
-  @ApiResponse({ 
-    status: HttpStatus.CONFLICT, 
-    description: 'User with this email already exists' 
+  @ApiResponse({
+    status: HttpStatus.CONFLICT,
+    description: 'User with this email already exists',
   })
   @Post('register')
   @HttpCode(HttpStatus.CREATED)
@@ -56,7 +57,6 @@ export class UserController {
     description: "List of user's calendar events",
     type: [CalendarEvent],
   })
-
   @ApiResponse({ status: 404, description: 'User not found' })
   @Get(':userId/calendar/events')
   getUserCalendarEvents(
@@ -72,7 +72,6 @@ export class UserController {
     description: 'The holidays have been successfully added to the calendar',
     type: [CalendarEvent],
   })
-
   @ApiResponse({ status: 404, description: 'User not found' })
   @Post(':userId/calendar/holidays')
   @HttpCode(HttpStatus.CREATED)

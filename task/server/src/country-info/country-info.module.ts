@@ -1,5 +1,6 @@
-import { Module } from '@nestjs/common';
 import { HttpModule } from '@nestjs/axios';
+import { Module } from '@nestjs/common';
+
 import { CountryInfoController } from './country-info.controller';
 import { CountryInfoService } from './country-info.service';
 

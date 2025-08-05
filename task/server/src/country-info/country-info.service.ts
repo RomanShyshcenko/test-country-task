@@ -1,12 +1,14 @@
-import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { HttpService } from '@nestjs/axios';
+import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
+
 import { firstValueFrom } from 'rxjs';
-import { NagerCountryDto } from './dto/nager-country.dto';
+
 import {
   DetailedCountryInfoDto,
   BorderCountryDto,
   CountryPopulationYearDto,
 } from './dto/country-info.dto';
+import { NagerCountryDto } from './dto/nager-country.dto';
 
 interface NagerApiCountryInfo {
   commonName: string;
@@ -51,6 +53,7 @@ export class CountryInfoService {
       );
       return response.data;
     } catch (error) {
+      console.error('Error fetching available countries:', error);
       throw new HttpException(
         'Failed to fetch available countries',
         HttpStatus.BAD_GATEWAY,
@@ -58,7 +61,9 @@ export class CountryInfoService {
     }
   }
 
-  async getDetailedCountryInfo(countryCode: string): Promise<DetailedCountryInfoDto> {
+  async getDetailedCountryInfo(
+    countryCode: string,
+  ): Promise<DetailedCountryInfoDto> {
     try {
       // Fetch border countries from Date Nager API
       const borderInfoResponse = await firstValueFrom(

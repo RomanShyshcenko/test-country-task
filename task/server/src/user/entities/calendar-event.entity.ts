@@ -1,14 +1,28 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
+
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
+
 import type { User } from '.';
 
 @Entity('calendar_events')
 export class CalendarEvent {
-  @ApiProperty({ example: 1, description: 'Unique identifier of the calendar event' })
+  @ApiProperty({
+    example: 1,
+    description: 'Unique identifier of the calendar event',
+  })
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ApiProperty({ example: "New Year's Day", description: 'Name of the holiday' })
+  @ApiProperty({
+    example: "New Year's Day",
+    description: 'Name of the holiday',
+  })
   @Column()
   name: string;
 
@@ -20,11 +34,17 @@ export class CalendarEvent {
   @Column()
   countryCode: string;
 
-  @ApiProperty({ example: 'National holiday', description: 'Description of the holiday' })
+  @ApiProperty({
+    example: 'National holiday',
+    description: 'Description of the holiday',
+  })
   @Column({ nullable: true })
   description: string;
 
-  @ApiProperty({ example: 1, description: 'ID of the user who owns this calendar event' })
+  @ApiProperty({
+    example: 1,
+    description: 'ID of the user who owns this calendar event',
+  })
   @Column()
   userId: number;
 
@@ -32,15 +52,24 @@ export class CalendarEvent {
   @JoinColumn({ name: 'userId' })
   user: User;
 
-  @ApiProperty({ example: false, description: 'Whether the holiday is a global observance' })
+  @ApiProperty({
+    example: false,
+    description: 'Whether the holiday is a global observance',
+  })
   @Column({ default: false })
   global: boolean;
 
-  @ApiProperty({ example: 'America/New_York', description: 'Timezone for the holiday' })
+  @ApiProperty({
+    example: 'America/New_York',
+    description: 'Timezone for the holiday',
+  })
   @Column({ default: 'UTC' })
   timezone: string;
 
-  @ApiProperty({ example: 'Full day', description: 'Type of the holiday event' })
+  @ApiProperty({
+    example: 'Full day',
+    description: 'Type of the holiday event',
+  })
   @Column({ default: 'Full day' })
   eventType: string;
 
