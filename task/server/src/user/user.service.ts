@@ -56,7 +56,6 @@ export class UserService {
         `${this.dateNagerApiUrl}/PublicHolidays/${addHolidaysDto.year}/${addHolidaysDto.countryCode}`,
       ),
     );
-    console.log('Fetched holidays:', response.data);
     let holidays = response.data;
 
     // Filter holidays if specific ones are requested
@@ -65,7 +64,6 @@ export class UserService {
         addHolidaysDto.holidays!.some(name => name === holiday.name)
       );
     }
-    console.log('Filtered holidays:', holidays);
 
     // Create calendar events for each holiday
     const calendarEvents = holidays.map(holiday => {
